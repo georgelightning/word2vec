@@ -17,6 +17,16 @@ A pure NumPy implementation of the Word2Vec Skip-gram architecture with Negative
 
 ## Mathematical Objective
 The model minimizes the Negative Log-Likelihood of the center-context word pairs:
+$$L = -\log(\sigma(v_{pos} \cdot v_c)) - \sum_{i=1}^{k} \log(1 - \sigma(v_{neg,i} \cdot v_c))$$
+### Gradients for Backpropagation
+
+The derivative of the loss with respect to the vectors is:
+
+$$\frac{\partial L}{\partial v_{pos}} = (\sigma(v_{pos} \cdot v_c) - 1)v_c$$
+
+$$\frac{\partial L}{\partial v_{neg,i}} = \sigma(v_{neg,i} \cdot v_c)v_c$$
+
+$$\frac{\partial L}{\partial v_c} = (\sigma(v_{pos} \cdot v_c) - 1)v_{pos} + \sum_{i=1}^{k} \sigma(v_{neg,i} \cdot v_c)v_{neg,i}$$
 
 
 
